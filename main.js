@@ -64,10 +64,9 @@ coffee.isHot = false; //プロパティの値を変更
 let userInfo = null; //何もない状態(明示的にnullを指定、undefinedは使用しない)
 
 const newValue = 'Hello'; //グローバルスコープ
-function add(num1, num2) { //パラメーター
+function add(num1, num2) {
+  //パラメーター
   const value = num1 + num2; //関数内でしか使用できない,ローカルスコープ
-  return num1 + num2; //return文の後は処理が終了,処理を終了させるときにも使用する
+  return value; //return文の後は処理が終了,処理を終了させるときにも使用する
 } //ブロック文にはセミコロンをつけない
 const returnValue = add(2, 3); //return文を使うと値を返す
-console.log(returnValue); //関数の戻り値を表示
-
