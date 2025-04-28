@@ -37,3 +37,22 @@ ok = 'hello' && 'hi'; //左がturueなら右側が返される,左がfalseなら
 ok = '' || 'hi'; //左がturueなら左側が返される,左がfalseなら右側が返される
 const userInput = '';
 const userName = userInput || 'Guest'; //userInputが空文字の場合は'Guest'が代入される(デフォルトの値でよく使用される)
+const x = 15;
+ok = x > 10 && x < 20; //&&は短絡評価されないので両方の条件が評価される
+ok = x ===10 || x > 12 && userName; //順序は、>,===,&&,||の順で評価される
+if (ok) { 
+  console.log('OK');
+} else {
+  console.log('NG');
+}
+const username = '' ?? 'Guest'; //usernameがnullまたはundefinedの場合は''が代入される
+ok = !true; //falseになる
+ok = !'hello'; 
+ok = !x;
+ok = !!x; //真偽値を反転させる
+
+const hello = 'hell2';
+{// 変数helloはこのブロック内でのみ有効
+  const hello = 'hell1';
+}
+if (ok) {} //ブロック文は複数の処理をしたい場合に使用する
