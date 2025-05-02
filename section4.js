@@ -85,13 +85,39 @@ function vagetableColor(vagetable){
   }
 }
 // vagetableColor('tomato');
-let count = 0;
+let count = 100;
 while (count < 10) {
   console.log(count);
   count += 1;
 }
-let tomatoCount = 0;
+let tomatoCount =100;
 do {
-  console.log(tomatoCount);
+  // console.log(tomatoCount);
   tomatoCount += 1;
 } while (tomatoCount < 10); //do whileとwhileの違いは最初に実行される文があるかないか
+
+
+for (let pumkinCount = 0, i = 0; pumkinCount < 10; pumkinCount+= 1, i += 1) { //ブロック文の中のみに変数は有効
+  // console.log(pumkinCount, i);
+}
+
+const fruits = ['apple', 'banana', 'grape', 'orange', 'mango'];
+for (let i =0; i < fruits.length;i +=1) {
+  // console.log(fruits[i]);
+}
+for(const fruit of fruits) { //for ofは毎回違うブロックを作成する
+  // console.log(fruit);
+}
+
+const coffee = {
+  name: 'Cafe Latte',
+  size: 350,
+  isHot: true,
+}
+for (const key in coffee) {// for inはオブジェクトのプロパティを取得する
+  console.log(key);
+  console.log(coffee[key]);
+  if (key === 'size'){
+    break; //break文はfor in文の中で使用できる
+  }
+}
