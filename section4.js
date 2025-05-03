@@ -115,9 +115,21 @@ const coffee = {
   isHot: true,
 }
 for (const key in coffee) {// for inはオブジェクトのプロパティを取得する
-  console.log(key);
-  console.log(coffee[key]);
+  // console.log(key);
+  // console.log(coffee[key]);
   if (key === 'size'){
     break; //break文はfor in文の中で使用できる
   }
 }
+
+
+try { //エラーが発生した際に継続させたい時に使用する。ログイン処理などで使用される 
+  console.log(chocolate)
+} catch {
+  console.log('1');
+} finally { //try、catchの後に必ず実行される
+  console.log('2');
+}
+
+ 
+
