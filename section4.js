@@ -115,9 +115,27 @@ const coffee = {
   isHot: true,
 }
 for (const key in coffee) {// for inはオブジェクトのプロパティを取得する
-  console.log(key);
-  console.log(coffee[key]);
+  // console.log(key);
+  // console.log(coffee[key]);
   if (key === 'size'){
     break; //break文はfor in文の中で使用できる
   }
 }
+
+function logChocolate() {
+  try { //エラーが発生した際に継続させたい時に使用する。ログイン処理などで使用される 
+    console.log('0');
+    throw 'error'; //try文の中でエラーを発生させる
+  } catch(error) { //プロパティでエラーを取得できる
+    console.log('1', error);
+    console.log(chocolate);
+  } finally { //try、catchの後に必ず実行される
+    console.log('2');
+    return 'hi'; //return文な度でエラーがなかったことになる
+  }
+}
+console.log(logChocolate());
+throw 'error';
+
+ 
+
