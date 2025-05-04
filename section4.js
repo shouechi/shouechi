@@ -122,14 +122,20 @@ for (const key in coffee) {// for inはオブジェクトのプロパティを�
   }
 }
 
-
-try { //エラーが発生した際に継続させたい時に使用する。ログイン処理などで使用される 
-  console.log(chocolate)
-} catch {
-  console.log('1');
-} finally { //try、catchの後に必ず実行される
-  console.log('2');
+function logChocolate() {
+  try { //エラーが発生した際に継続させたい時に使用する。ログイン処理などで使用される 
+    console.log('0');
+    throw 'error'; //try文の中でエラーを発生させる
+  } catch(error) { //プロパティでエラーを取得できる
+    console.log('1', error);
+    console.log(chocolate);
+  } finally { //try、catchの後に必ず実行される
+    console.log('2');
+    return 'hi'; //return文な度でエラーがなかったことになる
+  }
 }
+console.log(logChocolate());
+throw 'error';
 
  
 
