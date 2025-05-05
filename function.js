@@ -29,5 +29,14 @@ let sum = (...nums) => { //レストパラメーター（引数を配列で受�
   }
   return total;
 }
-let subtract = (callback) => {}
-subtract(() => {});
+let subtract = (a, b, callback) => {
+  let result = a - b;
+  callback(result);
+}
+subtract(10, 3, (result) => {//コールバック関数
+  console.log(chokolate);
+  console.log(result);
+});
+// subtract(10, 4, (result) => {
+//   alert(result);
+// });
