@@ -31,7 +31,7 @@ let sum = (...nums) => { //レストパラメーター（引数を配列で受�
 }
 let subtract = (a, b, callback) => {
   let result = a - b;
-  callback(result);
+  // callback(result);
 }
 subtract(10, 3, (result) => {//コールバック関数
   console.log(chokolate);
@@ -40,3 +40,24 @@ subtract(10, 3, (result) => {//コールバック関数
 // subtract(10, 4, (result) => {
 //   alert(result);
 // });
+
+let generatePerson = (name) => {
+  let age = 0;
+  return{
+    getName: () => name,
+    getAge: () => age, 
+    incrementAge: () =>{ //値をそのまま返すと変更に可能になるため関数を呼びしたときだけに値を変更できるようにする
+      age += 1;
+    }
+   }
+}
+const yoshipi = generatePerson('Yoshipi');
+console.log(yoshipi.getAge());// 0になる
+yoshipi.incrementAge();
+yoshipi.incrementAge();
+console.log(yoshipi.getAge());// 2になる
+const tom = generatePerson('Tom');
+tom.incrementAge();
+tom.incrementAge();
+tom.incrementAge();
+console.log(tom.getAge());// 3になる
