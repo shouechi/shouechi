@@ -61,3 +61,17 @@ tom.incrementAge();
 tom.incrementAge();
 tom.incrementAge();
 console.log(tom.getAge());// 3になる
+
+const counter =(() => {
+  let count = 0;
+  return  () => {
+    count += 1;
+    return count;
+  }
+})(); //即時実行関数(IIFE)
+counter();
+
+let factorial = (n) => {
+  n === 0 ? 1  : n * factorial(n - 1); //再帰関数
+}
+factorial(3);
