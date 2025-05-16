@@ -85,3 +85,29 @@ book.title = undefined;
  if (book.title !== undefined) { //undefinedの場合はfalseになる
   console.log(book.title);
  } //in演算子を使用してプロパティが存在するか確認する
+ user = null;
+ user?.address; //オプショナルチェイニング演算子を使用してプロパティが存在するか確認する
+ // le - (global)   場合はglobal ojectが呼び出される
+ // - global object
+ // - this: global object
+console.log(this); //thisはグローバルオブジェクトを指す
+
+// -le (saythis())
+// -outerEnv: global
+// - this: strict ? undefined : global object
+let sayThis = function() {
+  console.log(this) //thisはグローバルオブジェクトかundefinedを指す
+}
+sayThis();
+const car = {
+  color: 'red',
+  sayThis,
+  chanageColor: function(color) {
+    this.color = color; //thisで柔軟に変更できる
+
+  },
+};
+const car2 = { ...car};
+car2.chanageColor('white');
+console.log(car2);
+console.log(car);
