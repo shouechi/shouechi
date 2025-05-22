@@ -137,13 +137,33 @@ sayThis = sayThis.bind({ hello: 'hello' }, 1); //bindメソッドを使用して
 const pastaCalculator = {
   servingSize: 60,
   member: 4,
-  get total() {
+  // get total() {
+  //   return this.servingSize * this.member;
+  // },
+  // set total(newValue) { //同じアクセサプロパティは１つのプロパティになる。
+  //   this.member = newValue / this.servingSize;
+  // },
+  // total: 240 //同じプロパティは最後が優先される
+};
+Object.defineProperty(pastaCalculator, 'total', {
+  configurable: true,
+  enumerable: true,
+  get() {
     return this.servingSize * this.member;
   },
-  set total(newValue) { //同じアクセサプロパティは１つのプロパティになる。
+  set() {
     this.member = newValue / this.servingSize;
-  },
-  total: 240 //同じプロパティは最後が優先される
-}
-pastaCalculator.total = 240; //setterを使用してプロパティを設定する
-console.log(pastaCalculator.total); //getterを使用してプロパティを取得する
+  }
+})
+console.log(Object.getOwnPropertyDescriptor(pastaCalculator, 'total')); //プロパティを見ることができる
+// pastaCalculator.total = 240; //setterを使用してプロパティを設定する
+// console.log(pastaCalculator.total); //getterを使用してプロパティを取得する
+const blog = {
+  title: 'How to make cake',
+  author: 'Yoshipi',
+};
+Object.preventExtensions(blog); //新規のプロパティを追加できない。
+Object.isExtensible(blog); //新規プロパティを追加できるか確認することができる。
+Object.seal(blog); //新規のプロパティを追加できない。既にあるプロパティも削除できない。
+Object.freeze(blog); //新規のプロパティを追加できない。既にあるプロパティも削除できない。更新できない。
+
