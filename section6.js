@@ -85,8 +85,8 @@ book.title = undefined;
  if (book.title !== undefined) { //undefinedの場合はfalseになる
   console.log(book.title);
  } //in演算子を使用してプロパティが存在するか確認する
- user = null;
- user?.address; //オプショナルチェイニング演算子を使用してプロパティが存在するか確認する
+//  user = null;
+//  user?.address; //オプショナルチェイニング演算子を使用してプロパティが存在するか確認する
  // le - (global)   場合はglobal ojectが呼び出される
  // - global object
  // - this: global object
@@ -98,16 +98,72 @@ console.log(this); //thisはグローバルオブジェクトを指す
 let sayThis = function() {
   console.log(this) //thisはグローバルオブジェクトかundefinedを指す
 }
-sayThis();
-const car = {
-  color: 'red',
-  sayThis,
-  chanageColor: function(color) {
-    this.color = color; //thisで柔軟に変更できる
 
-  },
+let logging = (cb) => { //アロー関数はthisを持たない
+  console.log(cb());
+}
+
+// -le (car.sayThis())
+// -outerEnv: global
+// - this: car
+// const car = {
+//   color: 'red',
+//   sayThis,
+//   chanageColor(color) { //メソッドの省略の書き方
+//     logging( function (color) {
+//       return this.color;
+//     });
+//     this.color = color; //thisで柔軟に変更できる
+//   },
+// };
+// car.chanageColor('white');
+
+// const car2 = { ...car};
+// car2.chanageColor('white');
+// console.log(car2);
+// console.log(car);
+// car.sayThis(); //メソッド呼び出しは一つ左のオブジェエクを指す
+
+sayThis = function(a, b) {
+  console.log(this, a, b);
+
 };
-const car2 = { ...car};
-car2.chanageColor('white');
-console.log(car2);
-console.log(car);
+// sayThis.call({ hello: 'hello' }, 1, 2); //callメソッドを使用してthisを指定する。引数で渡す
+// sayThis.apply({ hello: 'hello' }, [1, 2]); //applyメソッドを使用してthisを指定する。引数を配列で渡す
+sayThis = sayThis.bind({ hello: 'hello' }, 1); //bindメソッドを使用してthisを指定する。新しい関数を返す
+// sayThis.call({ hi: 'hi' }, 1, 2); //callなどメソッドを使用してもbindが優先され、変わらない。
+// sayThis(2); //bindメソッドは引数を固めることができる
+
+const pastaCalculator = {
+  servingSize: 60,
+  member: 4,
+  // get total() {
+  //   return this.servingSize * this.member;
+  // },
+  // set total(newValue) { //同じアクセサプロパティは１つのプロパティになる。
+  //   this.member = newValue / this.servingSize;
+  // },
+  // total: 240 //同じプロパティは最後が優先される
+};
+Object.defineProperty(pastaCalculator, 'total', {
+  configurable: true,
+  enumerable: true,
+  get() {
+    return this.servingSize * this.member;
+  },
+  set() {
+    this.member = newValue / this.servingSize;
+  }
+})
+console.log(Object.getOwnPropertyDescriptor(pastaCalculator, 'total')); //プロパティを見ることができる
+// pastaCalculator.total = 240; //setterを使用してプロパティを設定する
+// console.log(pastaCalculator.total); //getterを使用してプロパティを取得する
+const blog = {
+  title: 'How to make cake',
+  author: 'Yoshipi',
+};
+Object.preventExtensions(blog); //新規のプロパティを追加できない。
+Object.isExtensible(blog); //新規プロパティを追加できるか確認することができる。
+Object.seal(blog); //新規のプロパティを追加できない。既にあるプロパティも削除できない。
+Object.freeze(blog); //新規のプロパティを追加できない。既にあるプロパティも削除できない。更新できない。
+
